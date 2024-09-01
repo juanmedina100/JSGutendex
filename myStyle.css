@@ -1,0 +1,60 @@
+
+.carta-titulo {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 900;
+    background-color: #cccccc42;
+    padding:20px;
+    margin: 5px 150;
+    border-radius: 5px;
+    border: 1px solid #77f3f34d;
+}
+.carta {
+    font-size: 22px;
+    font-weight: 900;
+    background-color: #cccccc42;
+    /* background-image: url("https://www.gutenberg.org/cache/epub/2641/pg2641.cover.medium.jpg"); */
+    padding:10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #77f3f34d;
+}
+.card-titulo {
+
+    font-weight: 900;
+    font-size: 18px;
+    padding: 10px 10px 0px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    
+}
+.card-descargas {
+    font-size: 12px;
+    font-weight: 100;
+    padding: 0px 0px 10px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+.card-anios {
+    font-size: 16px;
+    font-weight: 100;
+    padding: 0px 0px 10px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+.lista_horizontal {
+    display: flex;          /* Utiliza flexbox para alinear horizontalmente */
+    padding: 0;            /* Elimina el relleno predeterminado */
+    margin: 0;             /* Elimina el margen predeterminado */
+}
+.list-item {
+    margin-right: 20px;    /* Espacio entre los items */
+    padding: 10px;         /* Relleno interno para cada item */
+    background-color: #f0f0f0; /* Color de fondo de los items */
+    border: 1px solid #ddd; /* Borde alrededor de los items */
+}
+
+/* Elimina el margen derecho en el último item */
+.lista_horizontal .list-item:last-child {
+    margin-right: 0;
+}
