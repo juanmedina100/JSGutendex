@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     guten();
 });
 
-let idiomaSeleccionado = "ab"
+let idiomaSeleccionado = "es"
 let idiomaEnDrop = "Idioma"
 
 async function idiomas() {
