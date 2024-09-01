@@ -5,12 +5,48 @@ function carga(){
     return myTexto;
 }
 document.addEventListener("DOMContentLoaded", function() {
+    idiomas()
     guten();
 });
+
+let idiomaSeleccionado = "ab"
+let idiomaEnDrop = "Idioma"
+
+async function idiomas() {
+    const response = await fetch("https://juanmedina100.github.io/idiomas-iso-639-1-json/idiomas-639-1.json")
+    const idiomaData = await response.json()
+
+    const div_dropMain = document.getElementById('dropdownContent')
+    const div_idiomaTitulo = document.getElementById("idiomaTitulo")
+    div_dropMain.innerHTML = ``
+    
+    idiomaData.idiomas.forEach(idio => {
+        const idi_a = document.createElement("a")
+        idi_a.setAttribute("href", `#${idio.idioma}`)
+        idi_a.textContent = idio.idioma
+        idi_a.addEventListener('click', () => idiomaAMostrar(idio.codigo,idio.idioma))
+        div_dropMain.appendChild(idi_a)
+        
+        console.log(idio.idioma)
+    })
+    div_idiomaTitulo.innerHTML = ""
+    div_idiomaTitulo.textContent = idiomaEnDrop
+
+}
+
+function idiomaAMostrar(idiomaCarga,idiomaEnDropDown){
+    
+    idiomaSeleccionado = idiomaCarga
+    idiomaEnDrop = idiomaEnDropDown
+
+    guten()
+    // return idiomaSeleccionado
+}
+
 async function guten(){
     const lista = document.getElementById('lista_libros');
     lista.innerHTML = ''
-    const reponse = await fetch(`https://gutendex.com/books/?languages=la&page=${numero}`);
+    const reponse = await fetch(`https://gutendex.com/books/?languages=${idiomaSeleccionado}&page=${numero}`);
     const data = await reponse.json()
     const start = 1;
     const conta = document.getElementById("contador");
@@ -24,7 +60,7 @@ async function guten(){
         const li = document.createElement('li');
         li.textContent = i;
         li.className = 'list-item';
-        console.log(i);
+        // console.log(i);
         horizontal_list.appendChild(li);
         li.style.cursor = 'pointer'; 
         li.addEventListener('click', () => handleNumberClick(i)); 
@@ -33,37 +69,38 @@ async function guten(){
     let index = 1;
     data.results.forEach(book=>{
         const li = document.createElement('li');
+        const div_imagen = document.createElement('img')
         const div_titulo = document.createElement('div')
         const div_descargas = document.createElement('div')
+        const div_name = document.createElement('div')
         const div_anios = document.createElement('div')
         div_titulo.textContent = index + " Title : " + book.title;
         div_descargas.textContent = "Downloads : " + book.download_count;
         book.authors.forEach(itemsBook => {
-            const name = book.authors.name
-            const age = calcularEdad(itemsBook.birth_year,itemsBook.death_year)
-            div_anios.textContent = `Age : `  + age
+            const name = itemsBook.name
+            const age = calculateage(itemsBook.birth_year,itemsBook.death_year)
+            div_name.textContent = "Name : " + name
+            div_anios.textContent = `Years lived : `  + age
         });
-        // div_anios.textContent = "Age : " + book.download_count;
+        const imagen = book.formats["image/jpeg"]
+        div_imagen.setAttribute("src", `${imagen}`)
+        
+        console.log(imagen)
+        li.appendChild(div_imagen);
         li.appendChild(div_titulo);
         li.appendChild(div_descargas);
+        li.appendChild(div_name);
         li.appendChild(div_anios);
+        div_imagen.className= "mi-imagen"
         div_titulo.className = 'card-titulo';
         // div_titulo.
         div_descargas.className = 'card-descargas';
         div_anios.className = 'card-anios';
+        div_name.className = 'card-name';
         lista.appendChild(li);
         li.className = "carta";
         index++;
     });
-
-
-    // const titles = data.results.map(book => book.title);
-    // const nameAutor = data.results.map(book=> book.authors.map(autor=> autor.name));
-    // Convertir la lista de títulos en una cadena separada por saltos de línea
-    // const titlesText = titles.join('\n');
-    // Asignar los títulos al elemento con id "titulo"
-    // document.getElementById('titulo').textContent = titlesText;
-    // document.getElementById('nameAuthor').textContent = nameAutor;
     return "Data";
 }
 let numero = 1
@@ -72,7 +109,7 @@ function handleNumberClick(number) {
     numero = number;
     guten();
 }
-function calcularEdad(nacimiento,muerte){
+function calculateage(nacimiento,muerte){
     return muerte - nacimiento
 }
 

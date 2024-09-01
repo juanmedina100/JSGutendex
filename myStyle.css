@@ -42,6 +42,13 @@
     margin: 5px 0;
     border-radius: 5px;
 }
+.card-name {
+    font-size: 16px;
+    font-weight: 100;
+    padding: 0px 0px 10px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
 .lista_horizontal {
     display: flex;          /* Utiliza flexbox para alinear horizontalmente */
     padding: 0;            /* Elimina el relleno predeterminado */
@@ -57,4 +64,13 @@
 /* Elimina el margen derecho en el último item */
 .lista_horizontal .list-item:last-child {
     margin-right: 0;
+}
+
+.mi-imagen {
+    width: 100px; /* Ajusta el tamaño de la imagen */
+    height: auto; /* Mantiene la proporción */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    display: block;
+    margin: 20px auto; /* Centra la imagen */
 }
